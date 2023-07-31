@@ -1,5 +1,6 @@
 #include <iostream>
-#include "unique_ptr.h"
+#include "unique_ptr.hpp"
+#include "unique_ptr.cpp"
 using namespace std;
 
 #define TEST_TRUE(expr) \
