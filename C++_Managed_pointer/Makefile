@@ -1,18 +1,11 @@
 CC = g++
+CFLAGS = -Wall -Wextra
 
-CFLAGS = -Wall -Wextra -std=c++11
+ptrtest: main.cpp unique_ptr.cpp
+	$(CC) $(CFLAGS) -o ptrtest main.cpp unique_ptr.cpp
 
-EXEC = test
-
-SOURCES = main.cpp unique_ptr.cpp 
-
-OBJECTS = $(SOURCES:.cpp=.o)
-
-$(EXEC): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(EXEC)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
+run:ptrtest
+	./ptrtest
+	
 clean:
-	rm -f $(EXEC) $(OBJECTS)
+	rm -f ptrtest

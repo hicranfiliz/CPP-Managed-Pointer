@@ -1,4 +1,9 @@
-#include "unique_ptr.h"
+
+#include "unique_ptr.hpp"
+
+//constructor:
+template <typename T>
+unique_ptr<T>::unique_ptr(T* ptr) : ptr_(ptr) {}
 
 // destructor:
 template <typename T>
@@ -10,15 +15,15 @@ unique_ptr<T>::~unique_ptr(){
 
 // move constructor:
 template <typename T>
-unique ptr<T>::unique_ptr(unique_ptr<T>&& other) noexcept: ptr(other.ptr_){
+unique_ptr<T>::unique_ptr(unique_ptr&& other) noexcept: ptr_(other.ptr_){
 	other.ptr_ = nullptr;
 }
 
 // move assignment:
 template <typename T>
-unique_ptr<T>& unique_ptr<T>::operator = (unique_ptr<T>&& other) noexcept{
+unique_ptr<T>& unique_ptr<T>::operator = (unique_ptr&& other) noexcept{
 	if(this!= &other){
-		delete ptr;
+		delete ptr_;
 		ptr_ = other.ptr_;
 		other.ptr_ = nullptr;
 	}
@@ -27,17 +32,19 @@ unique_ptr<T>& unique_ptr<T>::operator = (unique_ptr<T>&& other) noexcept{
 
 //dereference operator
 template <typename T>
-T& unique_ptr<T>::operator*() const{
+T& unique_ptr<T>::operator*() const {
 	return *ptr_;
 }
 
 //member access operator:
 
 template <typename T>
-T* unique_ptr<T>:: operator ->() const{
+T* unique_ptr<T>::operator->() const {
 	return ptr_;
 }
+
+//get the raw pointer
 template <typename T>
-T* unique_ptr<T>::get() const{
+T* unique_ptr<T>::get() const {
 	return ptr_;
 }
